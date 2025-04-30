@@ -58,4 +58,6 @@ void mostrarEstadoPalavra(char *palavraSecreta, int letrasUsadas[], int erros){
     printf("\n");
 }
 
-
+int letraUsada(char letra, int letrasUsadas[]){
+    return letrasUsadas[tolower(letra) - 'a'];
+}
