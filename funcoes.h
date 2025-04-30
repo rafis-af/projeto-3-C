@@ -7,7 +7,7 @@
 
 void lerPalavraAleatoria(char *palavra, char *dica);
 void mostrarForca(int erros);
-
+void mostrarEstadoPalavra(char *palavra, int letrasUsadas[], int erros);
 
 
 

@@ -45,4 +45,17 @@ void mostrarForca(int erros){
     printf("Erros: %d\n", erros);
 }
 
+void mostrarEstadoPalavra(char *palavraSecreta, int letrasUsadas[], int erros){
+    mostrarForca(erros);
+    printf("Palavra: ");
+    for (int i = 0; i < strlen(palavraSecreta); i++) {
+        if (letrasUsadas[tolower(palavraSecreta[i]) - 'a'] ) {
+            printf("%c ", palavraSecreta[i]);
+        } else {
+            printf("_ ");
+        }
+    }
+    printf("\n");
+}
+
 
