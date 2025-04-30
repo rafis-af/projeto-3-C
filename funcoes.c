@@ -5,6 +5,11 @@
 #include <ctype.h>
 #include "funcoes.h"
 
+void limparBuffer(){
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF) {}
+}
+
 void lerPalavraAleatoria(char *palavra, char *dica){
 
     FILE *fp = open("palavras-sortidas.txt", "r");
