@@ -6,7 +6,7 @@
 #define TAM_DICA 100
 
 void lerPalavraAleatoria(char *palavra, char *dica);
-
+void mostrarForca(int erros);
 
 
 

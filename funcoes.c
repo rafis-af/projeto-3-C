@@ -32,3 +32,17 @@ void lerPalavraAleatoria(char *palavra, char *dica){
         strcpy(dica, token);
     }
 }
+
+void mostrarForca(int erros){
+
+    printf("\n");
+    printf("  _______\n");
+    printf(" |/      |\n");
+    printf(" |      %c%c%c\n", (erros >= 1) ? 'O' : ' ', (erros >= 3) ? '/' : ' ', (erros >= 2) ? '\\' : ' ');
+    printf(" |      %c %c\n", (erros >= 5) ? '/' : ' ', (erros >= 4) ? '\\' : ' ');
+    printf(" |      \n");
+    printf(" |______\n\n");
+    printf("Erros: %d\n", erros);
+}
+
+
