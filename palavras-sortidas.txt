@@ -1,0 +1,10 @@
+armario:Usado para guardar roupas
+mesa:Usado para apoiar objetos
+lousa:Usado na sala de aula
+corinthians:Maior time do mundo
+pao:Feito a base de trigo
+cereal:Geralmente é usado no café da manhã
+telefone:Usado para fazer chamadas
+carro:Meio de transporte
+camiseta:Uma peça de roupa
+cadeira:Usado para sentar
