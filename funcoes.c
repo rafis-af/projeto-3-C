@@ -12,7 +12,7 @@ void limparBuffer(){
 
 void lerPalavraAleatoria(char *palavra, char *dica){
 
-    FILE *fp = open("palavras-sortidas.txt", "r");
+    FILE *fp = fopen("palavras-sortidas.txt", "r");
     if (fp == NULL) {
         printf("Erro ao abrir o arquivo.\n");
         exit(1);
@@ -24,29 +24,34 @@ void lerPalavraAleatoria(char *palavra, char *dica){
     while (fgets(linhas[total], sizeof(linhas[total]), fp)) {
 
         if(strchr(linhas[total], ':')){
+            linhas[total][strcspn(linhas[total], "\n")] = '\0';
             total++;
-        }
-        fclose(fp);
-
-        srand(time(NULL));
-        int sorteio = rand() % total;
-
-        char *token = strtok(linhas[sorteio], ":");
-        strcpy(palavra, token);
-        token = strtok(NULL, ":");
-        strcpy(dica, token);
+        }   
     }
+
+    fclose(fp);
+
+    int sorteio = rand() % total;
+
+
+    char *token = strtok(linhas[sorteio], ":");
+    strcpy(palavra, token);
+    token = strtok(NULL, ":");
+    strcpy(dica, token);
 }
 
 void mostrarForca(int erros){
 
     printf("\n");
     printf("  _______\n");
-    printf(" |/      |\n");
-    printf(" |      %c%c%c\n", (erros >= 1) ? 'O' : ' ', (erros >= 3) ? '/' : ' ', (erros >= 2) ? '\\' : ' ');
-    printf(" |      %c %c\n", (erros >= 5) ? '/' : ' ', (erros >= 4) ? '\\' : ' ');
-    printf(" |      \n");
-    printf(" |______\n\n");
+    printf(" |/     |\n");
+    if (erros >= 1) printf(" |     O\n");
+    if (erros >= 2) printf(" |     | \n");
+    if (erros >= 3) printf(" |    /| \n");
+    if (erros >= 4) printf(" |    / \n");
+    if (erros >= 5) printf(" |   / \n");
+    if (erros >= 6) printf(" |  / \n");
+    printf(" | \n");
     printf("Erros: %d\n", erros);
 }
 
