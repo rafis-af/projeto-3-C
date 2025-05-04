@@ -2,60 +2,55 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <ctype.h>
 #include "funcoes.h"
 
-int main(int argc, char const *argv[]){
-    
-    srand(time(NULL));
-    char palavra[TAM_PALAVRA];    
-    char dica[TAM_DICA];
+int main() {
+    srand(time(NULL))
+    char palavra[TAM_PALAVRA + 1];
+    char dica[TAM_DICA + 1];
     int letrasUsadas[26] = {0};
     int erros = 0;
-    int acertos = 0;
 
-    lerPalavraAleatoria(palavra,dica);
-    int tamanhoPalavra = strlen(palavra);
+    lerPalavraAleatoria(palavra, dica);
+
+    int tamanho = strlen(palavra);
+    int tentativas = tamanho;
 
     printf("Dica: %s\n", dica);
 
-    while (erros < 6 && acertos < tamanhoPalavra) {
+    while(erros < tentativas){
         mostrarEstadoPalavra(palavra, letrasUsadas, erros);
-        printf("Digite uma letra: ");
-        char tentativa;
-        scanf(" %c", &tentativa);
+
+        printf("\nDigite uma letra: ");
+        char letra;
+        scanf(" %c", &letra);
         limparBuffer();
 
-        tentativa = tolower(tentativa);
-
-        if (letraUsada(tentativa, letrasUsadas)) {
-            printf("Letra já utilizada!\n");
+        letra = tolower(letra);
+        if(letraUsada(letra, letrasUsadas)){
+            printf("Você já usou a letra '%c'. Tente outra.\n", letra);
             continue;
         }
 
-        letrasUsadas[tolower(tentativa) - 'a'] = 1;
+        letrasUsadas[letra - 'a'] = 1;
 
-        int acerto = 0;
-        for (int i = 0; i < tamanhoPalavra; i++) {
-            if (palavra[i] == tentativa) {
-                acerto = 1;
-                acertos++;
+        if(strchr(palavra, letra) == NULL){
+            erros++;
+            printf("Letra '%c' não existe na palavra.\n", letra);
+        }
+
+        int ganhou = 1;
+        for(int i = 0; i < tamanho; i++){
+            if(!letrasUsadas[tolower(palavra[i]) - 'a']){
+                ganhou = 0;
+                break;
             }
         }
-        if (!acerto) {
-            erros++;
-            printf("Letra errada!\n");
-        } else {
-            printf("Letra correta!\n");
+        if(ganhou){
+            printf("Parabéns! Você adivinhou a palavra: %s\n", palavra);
+            return 0;
         }
     }
-    if (erros == tamanhoPalavra) {
-        printf("Você perdeu! A palavra era: %s\n", palavra);
-    } else {
-        mostrarForca(erros);
-        printf("Parabéns! Você adivinhou a palavra: %s\n", palavra);
-    }
-
-    system("pause");
+    printf("Você perdeu! A palavra era: %s\n", palavra);
     return 0;
 }
