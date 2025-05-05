@@ -49,7 +49,7 @@ void salvarJogo(char *palavra, char *dica, int letrasUsadas[], int erros){
     fprintf(arquivo, "Palavra - %s\n", palavra);
 
     fprintf(arquivo, "\nLetras Erradas:\n");
-    
+
     int temErradas = 0;
     for(int i = 0; i < 26; i++){
         if (letrasUsadas[i] && !strchr(palavra, 'a' + i)){
@@ -59,7 +59,7 @@ void salvarJogo(char *palavra, char *dica, int letrasUsadas[], int erros){
     }
     if(!temErradas) fprintf(arquivo, "Nenhuma");
     fprintf(arquivo, "\n\n");
-    
+
     fprintf(arquivo, "Letras Corretas\n");
     int temCorretas = 0;
     for(int i = 0; i < 26; i++){
@@ -80,21 +80,21 @@ int carregarJogo(char *palavra, char *dica, int letrasUsadas[], int *erros){
     if(arquivo == NULL) return 0;
 
     char linha[200];
-    
+
     fgets(linha, sizeof(linha), arquivo);
     sscanf(linha, "Dica - %[^\n]", dica);
-    
+
     fgets(linha, sizeof(linha), arquivo);
     sscanf(linha, "Palavra - %[^\n]", palavra);
-    
+
     for(int i = 0; i < 26; i++){
         letrasUsadas[i] = 0;
     }
-    
+
     fgets(linha, sizeof(linha), arquivo);
-    
+
     fgets(linha, sizeof(linha), arquivo);
-    
+
     fgets(linha, sizeof(linha), arquivo);
     if(strcmp(linha, "Nenhuma\n") != 0){
         char *token = strtok(linha, " ");
@@ -103,11 +103,11 @@ int carregarJogo(char *palavra, char *dica, int letrasUsadas[], int *erros){
             token = strtok(NULL, " ");
         }
     }
-    
+
     fgets(linha, sizeof(linha), arquivo);
-    
+
     fgets(linha, sizeof(linha), arquivo);
-    
+
     fgets(linha, sizeof(linha), arquivo);
     if(strcmp(linha, "Nenhuma\n") != 0){
         char *token = strtok(linha, " ");
@@ -126,6 +126,26 @@ int carregarJogo(char *palavra, char *dica, int letrasUsadas[], int *erros){
 
     fclose(arquivo);
     return 1;
+}
+
+void logs(char *tipo, char *info, int acertou){
+    FILE *log = fopen("logs-forca.txt", "a");
+    if(log == NULL){
+        return;
+    }
+
+    time_t agora;
+    time(&agora);
+    char hora[10];
+    strftime(hora, 10, "%H:%M:%S", localtime(&agora));
+
+    if(strcmp(tipo, "Letra") == 0){
+        fprintf(log, "[%s] %s - %c (%s)\n", hora, tipo, *info, acertou ? "Acertou" : "Errou");
+    }else{
+        fprintf(log, "[%s] %s - %s\n", hora, tipo, info);
+    }
+
+    fclose(log);
 }
 
 void mostrarForca(int erros) {
@@ -194,7 +214,6 @@ void mostrarForca(int erros) {
     printf("_|___\n");
     printf("\nErros: %d\n", erros);
 }
-
 
 void mostrarEstadoPalavra(char *palavraSecreta, int letrasUsadas[], int erros){
     mostrarForca(erros);

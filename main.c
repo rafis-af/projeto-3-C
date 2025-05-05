@@ -31,6 +31,7 @@ int main() {
         int tentativas = 8;
 
         printf("Dica: %s\n", dica);
+        logs("Dica", dica, 0);
 
         while(erros < tentativas){
             mostrarEstadoPalavra(palavra, letrasUsadas, erros);
@@ -54,10 +55,13 @@ int main() {
 
             letrasUsadas[letra - 'a'] = 1;
 
-            if(strchr(palavra, letra) == NULL){
+            int letraExiste = strchr(palavra, letra) != NULL;
+            if(!letraExiste){
                 erros++;
                 printf("Letra '%c' não existe na palavra.\n", letra);
             }
+
+            logs("Letra", &letra, letraExiste);
 
             int ganhou = 1;
             for(int i = 0; i < tamanho; i++){
