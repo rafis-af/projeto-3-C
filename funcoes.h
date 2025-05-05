@@ -10,5 +10,6 @@ void mostrarForca(int erros);
 void mostrarEstadoPalavra(char *palavra, int letrasUsadas[], int erros);
 int letraUsada(char letra, int letrasUsadas[]);
 void limparBuffer();
+int jogarNovamente();
 
 #endif

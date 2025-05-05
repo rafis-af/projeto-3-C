@@ -6,51 +6,60 @@
 
 int main() {
     srand(time(NULL));
-    char palavra[TAM_PALAVRA + 1];
-    char dica[TAM_DICA + 1];
-    int letrasUsadas[26] = {0};
-    int erros = 0;
 
-    lerPalavraAleatoria(palavra, dica);
+    do{
 
-    int tamanho = strlen(palavra);
-    int tentativas = 8;
+        char palavra[TAM_PALAVRA + 1];
+        char dica[TAM_DICA + 1];
+        int letrasUsadas[26] = {0};
+        int erros = 0;
 
-    printf("Dica: %s\n", dica);
+        lerPalavraAleatoria(palavra, dica);
 
-    while(erros < tentativas){
-        mostrarEstadoPalavra(palavra, letrasUsadas, erros);
+        int tamanho = strlen(palavra);
+        int tentativas = 8;
 
-        printf("\nDigite uma letra: ");
-        char letra;
-        scanf(" %c", &letra);
-        limparBuffer();
+        printf("Dica: %s\n", dica);
 
-        letra = tolower(letra);
-        if(letraUsada(letra, letrasUsadas)){
-            printf("Você já usou a letra '%c'. Tente outra.\n", letra);
-            continue;
-        }
+        while(erros < tentativas){
+            mostrarEstadoPalavra(palavra, letrasUsadas, erros);
 
-        letrasUsadas[letra - 'a'] = 1;
+            printf("\nDigite uma letra: ");
+            char letra;
+            scanf(" %c", &letra);
+            limparBuffer();
 
-        if(strchr(palavra, letra) == NULL){
-            erros++;
-            printf("Letra '%c' não existe na palavra.\n", letra);
-        }
+            letra = tolower(letra);
+            if(letraUsada(letra, letrasUsadas)){
+                printf("Você já usou a letra '%c'. Tente outra.\n", letra);
+                continue;
+            }
 
-        int ganhou = 1;
-        for(int i = 0; i < tamanho; i++){
-            if(!letrasUsadas[tolower(palavra[i]) - 'a']){
-                ganhou = 0;
+            letrasUsadas[letra - 'a'] = 1;
+
+            if(strchr(palavra, letra) == NULL){
+                erros++;
+                printf("Letra '%c' não existe na palavra.\n", letra);
+            }
+
+            int ganhou = 1;
+            for(int i = 0; i < tamanho; i++){
+                if(!letrasUsadas[tolower(palavra[i]) - 'a']){
+                    ganhou = 0;
+                    break;
+                }
+            }
+            if(ganhou){
+                printf("Parabéns! Você adivinhou a palavra: %s\n", palavra);
                 break;
             }
         }
-        if(ganhou){
-            printf("Parabéns! Você adivinhou a palavra: %s\n", palavra);
-            return 0;
+        if(erros >= tentativas){
+            printf("Você perdeu! A palavra era: %s\n", palavra);
         }
-    }
-    printf("Você perdeu! A palavra era: %s\n", palavra);
+
+    }while(jogarNovamente());
+
+    printf("Obrigado por jogar!");
     return 0;
 }

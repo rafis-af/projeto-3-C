@@ -124,3 +124,11 @@ void mostrarEstadoPalavra(char *palavraSecreta, int letrasUsadas[], int erros){
 int letraUsada(char letra, int letrasUsadas[]){
     return letrasUsadas[tolower(letra) - 'a'];
 }
+
+int jogarNovamente(){
+    printf("\nVocê deseja jogar novamente? Digite s ou n: ");
+    char resposta;
+    scanf(" %c", &resposta);
+    limparBuffer();
+    return tolower(resposta) == 's';
+}
