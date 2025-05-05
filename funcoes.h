@@ -8,8 +8,10 @@
 void lerPalavraAleatoria(char *palavra, char *dica);
 void mostrarForca(int erros);
 void mostrarEstadoPalavra(char *palavra, int letrasUsadas[], int erros);
-int letraUsada(char letra, int letrasUsadas[]);
 void limparBuffer();
+void salvarJogo(char *palavra, char *dica, int letrasUsadas[], int erros);
+int carregarJogo(char *palavra, char *dica, int letrasUsadas[], int *erros);
+int letraUsada(char letra, int letrasUsadas[]);
 int jogarNovamente();
 
 #endif

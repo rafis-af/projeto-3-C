@@ -8,13 +8,24 @@ int main() {
     srand(time(NULL));
 
     do{
-
         char palavra[TAM_PALAVRA + 1];
         char dica[TAM_DICA + 1];
         int letrasUsadas[26] = {0};
         int erros = 0;
 
-        lerPalavraAleatoria(palavra, dica);
+        printf("Deseja carregar um jogo? Digite s ou n: ");
+        char opcao;
+        scanf(" %c", &opcao);
+        limparBuffer();
+
+        if(tolower(opcao) == 's'){
+            if(!carregarJogo(palavra, dica, letrasUsadas, &erros)){
+                printf("Nenhum jogo encontrado, iniciando um novo jogo.\n");
+                lerPalavraAleatoria(palavra, dica);
+            }
+        }else{
+            lerPalavraAleatoria(palavra, dica);
+        }
 
         int tamanho = strlen(palavra);
         int tentativas = 8;
@@ -24,10 +35,16 @@ int main() {
         while(erros < tentativas){
             mostrarEstadoPalavra(palavra, letrasUsadas, erros);
 
-            printf("\nDigite uma letra: ");
+            printf("Se você deseja salvar e sair do jogo, digite 1");
+            printf("\nDigite uma letra:");
             char letra;
             scanf(" %c", &letra);
             limparBuffer();
+
+            if(letra == '1'){
+                salvarJogo(palavra, dica, letrasUsadas, erros);
+                return 0;
+            }
 
             letra = tolower(letra);
             if(letraUsada(letra, letrasUsadas)){

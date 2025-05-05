@@ -32,12 +32,100 @@ void lerPalavraAleatoria(char *palavra, char *dica){
     fclose(fp);
 
     int sorteio = rand() % total;
-
-
     char *token = strtok(linhas[sorteio], ":");
     strcpy(palavra, token);
     token = strtok(NULL, ":");
     strcpy(dica, token);
+}
+
+void salvarJogo(char *palavra, char *dica, int letrasUsadas[], int erros){
+    FILE *arquivo = fopen("salvar-forca.txt", "w");
+    if(arquivo == NULL){
+        printf("Erro ao salvar o jogo!\n");
+        return;
+    }
+
+    fprintf(arquivo, "Dica - %s\n", dica);
+    fprintf(arquivo, "Palavra - %s\n", palavra);
+
+    fprintf(arquivo, "\nLetras Erradas:\n");
+    
+    int temErradas = 0;
+    for(int i = 0; i < 26; i++){
+        if (letrasUsadas[i] && !strchr(palavra, 'a' + i)){
+            fprintf(arquivo, "%c ", 'a' + i);
+            temErradas = 1;
+        }
+    }
+    if(!temErradas) fprintf(arquivo, "Nenhuma");
+    fprintf(arquivo, "\n\n");
+    
+    fprintf(arquivo, "Letras Corretas\n");
+    int temCorretas = 0;
+    for(int i = 0; i < 26; i++){
+        if(letrasUsadas[i] && strchr(palavra, 'a' + i)){
+            fprintf(arquivo, "%c ", 'a' + i);
+            temCorretas = 1;
+        }
+    }
+    if(!temCorretas) fprintf(arquivo, "Nenhuma");
+    fprintf(arquivo, "\n");
+
+    fclose(arquivo);
+    printf("Jogo salvo com sucesso!\n");
+}
+
+int carregarJogo(char *palavra, char *dica, int letrasUsadas[], int *erros){
+    FILE *arquivo = fopen("salvar-forca.txt", "r");
+    if(arquivo == NULL) return 0;
+
+    char linha[200];
+    
+    fgets(linha, sizeof(linha), arquivo);
+    sscanf(linha, "Dica - %[^\n]", dica);
+    
+    fgets(linha, sizeof(linha), arquivo);
+    sscanf(linha, "Palavra - %[^\n]", palavra);
+    
+    for(int i = 0; i < 26; i++){
+        letrasUsadas[i] = 0;
+    }
+    
+    fgets(linha, sizeof(linha), arquivo);
+    
+    fgets(linha, sizeof(linha), arquivo);
+    
+    fgets(linha, sizeof(linha), arquivo);
+    if(strcmp(linha, "Nenhuma\n") != 0){
+        char *token = strtok(linha, " ");
+        while(token != NULL){
+            letrasUsadas[tolower(token[0]) - 'a'] = 1;
+            token = strtok(NULL, " ");
+        }
+    }
+    
+    fgets(linha, sizeof(linha), arquivo);
+    
+    fgets(linha, sizeof(linha), arquivo);
+    
+    fgets(linha, sizeof(linha), arquivo);
+    if(strcmp(linha, "Nenhuma\n") != 0){
+        char *token = strtok(linha, " ");
+        while(token != NULL){
+            letrasUsadas[tolower(token[0]) - 'a'] = 1;
+            token = strtok(NULL, " ");
+        }
+    }
+
+    *erros = 0;
+    for(int i = 0; i < 26; i++){
+        if(letrasUsadas[i] && !strchr(palavra, 'a' + i)){
+            (*erros)++;
+        }
+    }
+
+    fclose(arquivo);
+    return 1;
 }
 
 void mostrarForca(int erros) {
