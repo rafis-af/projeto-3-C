@@ -5,7 +5,7 @@
 #include "funcoes.h"
 
 int main() {
-    srand(time(NULL))
+    srand(time(NULL));
     char palavra[TAM_PALAVRA + 1];
     char dica[TAM_DICA + 1];
     int letrasUsadas[26] = {0};
@@ -14,7 +14,7 @@ int main() {
     lerPalavraAleatoria(palavra, dica);
 
     int tamanho = strlen(palavra);
-    int tentativas = tamanho;
+    int tentativas = 8;
 
     printf("Dica: %s\n", dica);
 

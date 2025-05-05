@@ -20,7 +20,7 @@ void lerPalavraAleatoria(char *palavra, char *dica){
 
     char linhas[TAM_MAX][TAM_PALAVRA + TAM_DICA];
     int total = 0;
-    
+
     while (fgets(linhas[total], sizeof(linhas[total]), fp)) {
 
         if(strchr(linhas[total], ':')){
@@ -40,20 +40,73 @@ void lerPalavraAleatoria(char *palavra, char *dica){
     strcpy(dica, token);
 }
 
-void mostrarForca(int erros){
-
+void mostrarForca(int erros) {
     printf("\n");
-    printf("  _______\n");
-    printf(" |/     |\n");
-    if (erros >= 1) printf(" |     O\n");
-    if (erros >= 2) printf(" |     | \n");
-    if (erros >= 3) printf(" |    /| \n");
-    if (erros >= 4) printf(" |    / \n");
-    if (erros >= 5) printf(" |   / \n");
-    if (erros >= 6) printf(" |  / \n");
-    printf(" | \n");
-    printf("Erros: %d\n", erros);
+    printf("  _______     \n");
+    printf(" |/      |    \n");
+
+    switch (erros) {
+        case 0:
+            printf(" |            \n");
+            printf(" |            \n");
+            printf(" |            \n");
+            printf(" |            \n");
+            break;
+        case 1:
+            printf(" |     (_)    \n");
+            printf(" |            \n");
+            printf(" |            \n");
+            printf(" |            \n");
+            break;
+        case 2:
+            printf(" |     (_)    \n");
+            printf(" |      |     \n");
+            printf(" |            \n");
+            printf(" |            \n");
+            break;
+        case 3:
+            printf(" |     (_)    \n");
+            printf(" |     \\|     \n");
+            printf(" |            \n");
+            printf(" |            \n");
+            break;
+        case 4:
+            printf(" |     (_)    \n");
+            printf(" |     \\|/    \n");
+            printf(" |            \n");
+            printf(" |            \n");
+            break;
+        case 5:
+            printf(" |     (_)    \n");
+            printf(" |     \\|/    \n");
+            printf(" |      |     \n");
+            printf(" |            \n");
+            break;
+        case 6:
+            printf(" |     (_)    \n");
+            printf(" |     \\|/    \n");
+            printf(" |      |     \n");
+            printf(" |     / \  \n");
+            break;
+        case 7:
+            printf(" |     (_)    \n");
+            printf(" |     \\|/    \n");
+            printf(" |      |     \n");
+            printf(" |     / \\  \n");
+            break;
+        default:
+            printf(" |            \n");
+            printf(" |            \n");
+            printf(" |            \n");
+            printf(" |            \n");
+            break;
+    }
+
+    printf(" |\n");
+    printf("_|___\n");
+    printf("\nErros: %d\n", erros);
 }
+
 
 void mostrarEstadoPalavra(char *palavraSecreta, int letrasUsadas[], int erros){
     mostrarForca(erros);
