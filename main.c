@@ -36,7 +36,7 @@ int main() {
         while(erros < tentativas){
             mostrarEstadoPalavra(palavra, letrasUsadas, erros);
 
-            printf("Se você deseja salvar e sair do jogo, digite 1");
+            printf("Digite 1 se você deseja salvar e sair do jogo.");
             printf("\nDigite uma letra:");
             char letra;
             scanf(" %c", &letra);
