@@ -8,3 +8,13 @@ telefone:Usado para fazer chamadas
 carro:Meio de transporte
 camiseta:Uma peça de roupa
 cadeira:Usado para sentar
+girassol:segue o movimento do céu durante o dia
+nevoeiro:esconde tudo logo cedo, mas some com o sol
+tempestade:é bonita de longe, mas perigosa de perto
+engrenagem:nunca trabalha sozinha, mas não fala
+antena:escuta tudo, mas não tem ouvidos
+bússola:sempre aponta o mesmo caminho, mesmo sem saber onde está
+ironia:diz o contrário para dizer tudo
+cofre:guarda segredos, mas não fala nada
+paleta:carrega cores sem pintar nada
+miragem:parece real, mas evapora com o toque
