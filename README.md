@@ -4,7 +4,7 @@ Este é um jogo em que o jogador precisa acertar a palavra proposta, tendo como 
 # Funcionalidades
 Iniciar Partida: Escolha iniciar um novo jogo ou carregar um jogo já salvo.
 
-Exibição da Forca: Desenha a forca completa conforme os erros
+Exibição da Forca: Desenha a forca completa conforme os erros.
 
 Dica: Mostra uma palavra relacionada a palavra proposta.
 
@@ -23,4 +23,4 @@ palavras-sortidas.txt: Lista de palavras e dicas.
 
 salvar-forca.txt: armazena o progresso do jogo atual contendo dica, palavra a ser descoberta e letras corretas e erradas.
 
-logs-forca.txt: armazena as ações do jogador dentro do programa contendo as horas, dica da palavra e a letra jogada
+logs-forca.txt: armazena as ações do jogador dentro do programa contendo as horas, dica da palavra e a letra jogada.
