@@ -27,3 +27,7 @@ palavras-sortidas.txt: Lista de palavras e dicas.
 salvar-forca.txt: armazena o progresso do jogo atual contendo dica, palavra a ser descoberta e letras corretas e erradas.
 
 logs-forca.txt: armazena as ações do jogador dentro do programa contendo as horas, dica da palavra e a letra jogada.
+
+# Criadores
+Rafael Almeida Ferreira RA: 24.224.013-3
+Renan Sartori Evangelista RA: 24.224.004-2
