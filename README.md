@@ -30,4 +30,5 @@ logs-forca.txt: armazena as ações do jogador dentro do programa contendo as ho
 
 # Criadores
 Rafael Almeida Ferreira RA: 24.224.013-3
+
 Renan Sartori Evangelista RA: 24.224.004-2
